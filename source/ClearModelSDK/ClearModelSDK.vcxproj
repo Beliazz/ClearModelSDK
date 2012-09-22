@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4C046011-68C1-4143-8EB2-25808B397F42}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ClearModelSDK</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <LibraryPath>$(BLOCO_HOME)\TinyXML\lib;$(BLOCO_HOME)\bullet\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(BLOCO_HOME)\TinyXML\include;$(BLOCO_HOME)\bullet\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;CLEARMODELSDK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>robocopy $(OutDir) $(BLOCO_HOME)\$(ProjectName)\bin\$(Configuration)\ "*.dll" /PURGE
+robocopy $(OutDir) $(BLOCO_HOME)\$(ProjectName)\lib\$(Configuration)\ "*.lib" /PURGE
+robocopy $(ProjectDir) $(BLOCO_HOME)\$(ProjectName)\include "*.h" /PURGE /E /XD "$(OutDir)" "$(OutDir)\Debug"
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CLEARMODELSDK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="ClearModelSDK.h" />
+    <ClInclude Include="Definitions.h" />
+    <ClInclude Include="GlobalCameraSettings\GlobalCameraSettings.h" />
+    <ClInclude Include="GlobalLightSettings\GlobalLightSettings.h" />
+    <ClInclude Include="GlobalTimeSettings\GlobalTimeSettings.h" />
+    <ClInclude Include="IOHelper.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelElement.h" />
+    <ClInclude Include="SceneElements\CameraNode.h" />
+    <ClInclude Include="SceneElements\EmptyNode.h" />
+    <ClInclude Include="SceneElements\LightNode.h" />
+    <ClInclude Include="SceneElements\LODGroudNode.h" />
+    <ClInclude Include="SceneElements\MarkerNode.h" />
+    <ClInclude Include="SceneElements\MeshNode.h" />
+    <ClInclude Include="SceneElements\NurbNode.h" />
+    <ClInclude Include="SceneElements\PatchNode.h" />
+    <ClInclude Include="SceneElements\SkeletonNode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ClearModelSDK.cpp" />
+    <ClCompile Include="Devinition.cpp" />
+    <ClCompile Include="GlobalCameraSettings\GlobalCameraSettings.cpp" />
+    <ClCompile Include="GlobalLightSettings\GlobalLightSettings.cpp" />
+    <ClCompile Include="GlobalTimeSettings\GlobalTimeSettings.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelElement.cpp" />
+    <ClCompile Include="SceneElements\CameraNode.cpp" />
+    <ClCompile Include="SceneElements\EmptyNode.cpp" />
+    <ClCompile Include="SceneElements\LightNode.cpp" />
+    <ClCompile Include="SceneElements\LODGroudNode.cpp" />
+    <ClCompile Include="SceneElements\MarkerNode.cpp" />
+    <ClCompile Include="SceneElements\MeshNode.cpp" />
+    <ClCompile Include="SceneElements\NurbNode.cpp" />
+    <ClCompile Include="SceneElements\PatchNode.cpp" />
+    <ClCompile Include="SceneElements\SkeletonNode.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
