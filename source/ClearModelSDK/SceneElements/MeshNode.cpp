@@ -83,6 +83,7 @@ bool ClearModelSDK::CMeshNode::VLoad( IOHelper* reader )
 
 		reader->read( (char*)&bone.m_GlobalMatrix, sizeof(float), 16 );
 		reader->read( (char*)&bone.m_BindPoseMatrix, sizeof(float), 16 );
+		reader->read( (char*)&bone.m_boundingBox, sizeof(float), 3 );
 
 		m_vecBones.push_back( bone );
 	}

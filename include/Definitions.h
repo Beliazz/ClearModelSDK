@@ -460,6 +460,11 @@ namespace ClearModelSDK
 			return Vector( m_sdata );
 		}
 
+		operator Vector3()
+		{
+			return Vector3( m_sdata );
+		}
+
 		operator Matrix()
 		{
 

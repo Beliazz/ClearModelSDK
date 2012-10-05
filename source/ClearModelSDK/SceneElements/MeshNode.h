@@ -250,6 +250,7 @@ namespace ClearModelSDK
 
 			m_GlobalMatrix   = xmlConverter( xmlelement->FirstChildElement( "GlobalMatrix" )->FirstChild() );
 			m_BindPoseMatrix = xmlConverter( xmlelement->FirstChildElement( "BindPoseMatrix" )->FirstChild() );
+			m_boundingBox    = xmlConverter( xmlelement->FirstChildElement( "BoundingBox" )->FirstChild() );
 		}
 
 		TiXmlElement* xml()
@@ -260,12 +261,15 @@ namespace ClearModelSDK
 
 			TiXmlElement* xmlGlobalMatrix	= new TiXmlElement( "GlobalMatrix" );
 			TiXmlElement* xmlBindPoseMatrix = new TiXmlElement( "BindPoseMatrix" );
+			TiXmlElement* xmlBoundingBox = new TiXmlElement( "BoundingBox" );
 
 			xmlGlobalMatrix->LinkEndChild(	 xmlText( m_GlobalMatrix ) );
 			xmlBindPoseMatrix->LinkEndChild( xmlText( m_BindPoseMatrix ) );
+			xmlBoundingBox->LinkEndChild( xmlText( m_boundingBox.str() ) );
 
 			xmlBone->LinkEndChild( xmlGlobalMatrix );
 			xmlBone->LinkEndChild( xmlBindPoseMatrix );
+			xmlBone->LinkEndChild( xmlBoundingBox );
 
 			return xmlBone;
 		}
@@ -274,6 +278,7 @@ namespace ClearModelSDK
 		string m_sParentName;
 		Matrix m_GlobalMatrix;
 		Matrix m_BindPoseMatrix;
+		Vector3 m_boundingBox;
 	};
 
 	struct CLEARMODELSDK_API sAnimationsKey__
